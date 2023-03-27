@@ -1,0 +1,105 @@
+---
+title: "Using the fabPrediction Package for Nonparametric Prediction"
+author: "Elizabeth Bersson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(devtools)
+```
+
+
+The `fabPrediction` package provides functions to implement FAB conformal prediction algorithms as in [Bersson and Hoff, 2022](https://arxiv.org/pdf/2204.08122.pdf).
+
+
+## Installation
+
+```{r devtools, eval=FALSE}
+devtools::install_github("betsybersson/fabPrediction")
+library(fabPrediction)
+```
+
+
+## Demo
+
+
+We will demonstrate FAB prediction with log radon values from counties in Minnesota. See [Price et al., 1996](https://pubmed.ncbi.nlm.nih.gov/8919076/). 
+
+```{r data}
+data(radon)
+```
+
+
+### Single Population Analysis
+
+If we have prior information regarding the population mean of the response, we can obtain FAB prediction regions for one county. 
+
+```{r onecounty}
+y_county9 = y[group==9]
+```
+
+
+A FAB prediction region, although nonparametric, constructs prediciton intervals based on a standard normal-normal model,
+\begin{aligned}
+y \sim{}& N(\theta,\sigma^2)\\
+\theta \sim{}& N(\mu,\tau^2\sigma^2),
+\end{aligned}
+and the algorithm requires input values of $\{\mu,\tau^2\}$. 
+
+Say we are fairly confident log radon values in County 9 should be centered at 0.5. Then, we can obtain a prediction region with the `fab_prediction` function with a nonparametric guarantee of $1-\epsilon$ conservative coverage.
+
+
+```{r fabcontinuous}
+fab.region = predictionInterval(y_county9,method = "FAB",
+                          epsilon = .15,
+                          mu = 0.5,tau2 = 1)
+fab.region$bounds
+```
+
+So, with at least $85\%$ probability, the next observed radon value in County 9 will be in the range contained in the object `fab.region`. We can easily plot the output:
+
+```{r plotfab, fig.height=4, fig.width = 6,warning=F}
+plot(fab.region,
+     main="FAB",xlab="log(radon)")
+```
+
+We can easily compare this the distance-to-average conformal prediction region.
+
+```{r plotdta, fig.height=4, fig.width = 6,warning=F}
+plot(predictionInterval(y_county9,method = "DTA",epsilon = .15),
+     main="DTA",xlab="log(radon)")
+```
+
+The functions include capabilities to obtain and plot standard frequentist and Bayesian prediction intervals based on a normal model. Unlike the FAB and DTA methods, the coverage of these methods rely on, among other things, accuracy of distributional assumptions.
+
+```{r parametric,warning=F}
+predictionInterval(y_county9,method = "direct",epsilon = .15)$bounds
+predictionInterval(y_county9,method = "Bayes",epsilon = .15,
+                   mu=0.5, tau2=1)$bounds
+```
+
+
+### Multiple Population Analysis
+
+The package also features capability to handle multiple populations. Spatial relationships among the populations and covariates can be used to estimate conformal parameters. 
+
+```{r, fig.height=4, fig.width = 6,warning=F}
+params = EB_values(1,y,group,W,cbind(1,u))
+plot(predictionInterval(y,method = "FAB",epsilon = .15,
+                        mu = params$mu, tau2 = params$tau2),
+     main="FAB PI For County 1",xlab="log(radon)")
+```
+
+
+
+
+
