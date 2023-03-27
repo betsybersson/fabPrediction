@@ -1,7 +1,6 @@
 ---
 title: "Using the fabPrediction Package for Nonparametric Prediction"
 author: "Elizabeth Bersson"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
