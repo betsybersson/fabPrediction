@@ -1,6 +1,0 @@
-load("/Users/betsybersson/Documents/Research/R_packages/fabPrediction/data/radon.RDS")
-radon
-load("/Users/betsybersson/Documents/Research/R_packages/fabPrediction/data/radon.RDS")
-radon
-kls
-ls
