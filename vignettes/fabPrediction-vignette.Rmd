@@ -35,6 +35,7 @@ We will demonstrate FAB prediction with log radon values from counties in Minnes
 
 ```{r data}
 data(radon)
+data(W)
 ```
 
 
@@ -43,7 +44,7 @@ data(radon)
 If we have prior information regarding the population mean of the response, we can obtain FAB prediction regions for one county. 
 
 ```{r onecounty}
-y_county9 = y[group==9]
+y_county9 = radon$radon[radon$group==9]
 ```
 
 
@@ -92,7 +93,7 @@ predictionInterval(y_county9,method = "Bayes",epsilon = .15,
 The package also features capability to handle multiple populations. Spatial relationships among the populations and covariates can be used to estimate conformal parameters. 
 
 ```{r, fig.height=4, fig.width = 6,warning=F}
-params = EB_values(1,y,group,W,cbind(1,u))
+params = EB_values(1,radon$radon,radon$group,W,X=rep(1,length(W)))
 plot(predictionInterval(y,method = "FAB",epsilon = .15,
                         mu = params$mu, tau2 = params$tau2),
      main="FAB PI For County 1",xlab="log(radon)")
