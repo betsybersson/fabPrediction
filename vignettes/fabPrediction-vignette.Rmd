@@ -57,12 +57,12 @@ y \sim{}& N(\theta,\sigma^2)\\
 \end{aligned}
 and the algorithm requires input values of $\{\mu,\tau^2\}$. 
 
-Say we are fairly confident log radon values in County 9 should be centered at 0.5. Then, we can obtain a prediction region with the `fab_prediction` function with a nonparametric guarantee of $1-\epsilon$ conservative coverage.
+Say we are fairly confident log radon values in County 9 should be centered at 0.5. Then, we can obtain a prediction region with the `fab_prediction` function with a nonparametric guarantee of $1-\alpha$ conservative coverage.
 
 
 ```{r fabcontinuous}
 fab.region = predictionInterval(y_county9,method = "FAB",
-                          epsilon = .15,
+                          alpha = .15,
                           mu = 0.5,tau2 = 1)
 fab.region$bounds
 ```
@@ -77,15 +77,15 @@ plot(fab.region,
 We can easily compare this the distance-to-average conformal prediction region.
 
 ```{r plotdta, fig.height=4, fig.width = 6,warning=F}
-plot(predictionInterval(y_county9,method = "DTA",epsilon = .15),
+plot(predictionInterval(y_county9,method = "DTA",alpha = .15),
      main="DTA",xlab="log(radon)")
 ```
 
 The functions include capabilities to obtain and plot standard frequentist and Bayesian prediction intervals based on a normal model. Unlike the FAB and DTA methods, the coverage of these methods rely on, among other things, accuracy of distributional assumptions.
 
 ```{r parametric,warning=F}
-predictionInterval(y_county9,method = "direct",epsilon = .15)$bounds
-predictionInterval(y_county9,method = "Bayes",epsilon = .15,
+predictionInterval(y_county9,method = "direct",alpha = .15)$bounds
+predictionInterval(y_county9,method = "Bayes",alpha = .15,
                    mu=0.5, tau2=1)$bounds
 ```
 
@@ -95,10 +95,10 @@ predictionInterval(y_county9,method = "Bayes",epsilon = .15,
 The package also features capability to handle multiple populations. Spatial relationships among the populations and covariates can be used to estimate conformal parameters. 
 
 ```{r, fig.height=4, fig.width = 6,warning=F}
-params = EB_values(1,radon$radon,radon$group,W,X=rep(1,length(W)))
-plot(predictionInterval(y,method = "FAB",epsilon = .15,
+params = EB_values(9,radon$radon,radon$group,W,X=rep(1,nrow(W)))
+plot(predictionInterval(y_county9,method = "FAB",alpha = .15,
                         mu = params$mu, tau2 = params$tau2),
-     main="FAB PI For County 1",xlab="log(radon)")
+     main="FAB PI For County 9", xlab="log(radon)")
 ```
 
 
