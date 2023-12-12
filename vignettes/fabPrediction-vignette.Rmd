@@ -1,5 +1,5 @@
 ---
-title: "Using the fabPrediction Package for Nonparametric Prediction"
+title: "Using the fabPrediction Package to obtain Nonparametric Prediction Regions"
 author: "Elizabeth Bersson"
 output: rmarkdown::html_vignette
 vignette: >
@@ -17,7 +17,9 @@ library(devtools)
 ```
 
 
-The `fabPrediction` package provides functions to implement FAB conformal prediction algorithms as in [Bersson and Hoff, 2022](https://arxiv.org/pdf/2204.08122.pdf).
+The `fabPrediction` package provides functions to implement FAB conformal prediction algorithms for continuous data as in [Bersson and Hoff, 2022](https://arxiv.org/pdf/2204.08122.pdf)
+and categorical counts data as in [Bersson and Hoff, 2023](https://arxiv.org/pdf/2311.15860.pdf).
+The package also includes capabilities to obtain standard direct and Bayesian prediction regions for both types of data.
 
 
 ## Installation
@@ -28,7 +30,7 @@ library(fabPrediction)
 ```
 
 
-## Demo
+## Demo - Countinuous Data
 
 
 We will demonstrate FAB prediction with log radon values from counties in Minnesota. See [Price et al., 1996](https://pubmed.ncbi.nlm.nih.gov/8919076/). 

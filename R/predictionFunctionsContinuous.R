@@ -4,23 +4,23 @@
 #'
 #' @param Y Observed data vector
 #' @param method Choice of prediction method. Options include FAB, DTA, direct, Bayes.
-#' @param epsilon Prediction error rate
+#' @param alpha Prediction error rate
 #' @param mu Prior expected mean of the population mean
 #' @param tau2 Prior expected variance of the population mean
 #' @return pred object containing prediction interval bounds and interval coverage
 #' @export
 predictionInterval = function(Y,method = "FAB",
-                          epsilon = .15,
+                          alpha = .15,
                           mu = 0,tau2 = 1){
 
   if (method == "FAB"){
-    out = fabPrediction(Y,epsilon = epsilon,mu = mu,tau2 = tau2)
+    out = fabPrediction(Y,alpha = alpha,mu = mu,tau2 = tau2)
   } else if (method == "DTA"){
-    out = dtaPrediction(Y,epsilon = epsilon)
+    out = dtaPrediction(Y,alpha = alpha)
   } else if (method == "direct"){
-    out = normalPrediction(Y,epsilon = epsilon)
+    out = normalPrediction(Y,alpha = alpha)
   } else if (method == "Bayes"){
-    out = bayesNormalPrediction(Y,epsilon = epsilon,mu = mu,tau2 = tau2)
+    out = bayesNormalPrediction(Y,alpha = alpha,mu = mu,tau2 = tau2)
   } else {
     stop(paste0("Error! Method ",method," is not a valid option!"))
   }
@@ -36,10 +36,10 @@ predictionInterval = function(Y,method = "FAB",
 #' @param Y Observed data vector
 #' @param mu Prior expected mean of the population mean
 #' @param tau2 Prior expected variance of the population mean
-#' @param epsilon Prediction error rate
+#' @param alpha Prediction error rate
 #' @return pred object
 #' @export
-fabPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
+fabPrediction = function(Y,alpha = .15,mu = 0,tau2 = 1){
 
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
@@ -56,14 +56,10 @@ fabPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
   sol2s = (2*(mu/tau2 + sum(Y))*tau2_theta-Y)/
     (1-2*tau2_theta)
 
-  # obtain epsilon level prediction interval
+  # obtain alpha level prediction interval
   S = sort(c(sol1s,sol2s))
-  k = floor(epsilon*(N+1))
+  k = floor(alpha*(N+1))
   int = c(S[k],S[2*N-k+1])
-
-  # if ( k == 0 ) {
-  #   stop("ALPHA is set too low.")
-  # }
 
   out = list("bounds" = int, "coverage" = (1-k/(N+1))*100,
              "data" = Y, "class" = "continuous")
@@ -80,10 +76,10 @@ fabPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
 #' @param Y Observed data vector
 #' @param mu Prior expected mean of the population mean
 #' @param tau2 Prior expected variance of the population mean
-#' @param epsilon Prediction error rate
+#' @param alpha Prediction error rate
 #' @return  pred object
 #' @export
-bayesNormalPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
+bayesNormalPrediction = function(Y,alpha = .15,mu = 0,tau2 = 1){
 
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
@@ -98,12 +94,12 @@ bayesNormalPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
   varj = 1 / (1/tau2 + N/sig2)
   thetaj = (mu/tau2 + ybar * N/sig2) * varj
 
-  tval = qt(1-epsilon/2,df = N-1)
+  tval = qt(1-alpha/2,df = N-1)
 
   ci_help = tval * sqrt(varj + sig2)
 
   out = list("bounds" = c(thetaj - ci_help,thetaj + ci_help),
-             "coverage" = (1-epsilon)*100,
+             "coverage" = (1-alpha)*100,
              "data" = Y, "class" = "continuous")
 
   class(out) = 'pred'
@@ -117,10 +113,10 @@ bayesNormalPrediction = function(Y,epsilon = .15,mu = 0,tau2 = 1){
 #' non-conformity measure. That is, |a + bz*| <= |ci + di z^*| where i indexes training data.
 #'
 #' @param Y Observed data vector
-#' @param epsilon Prediction error rate
+#' @param alpha Prediction error rate
 #' @return  pred object
 #' @export
-dtaPrediction = function(Y,epsilon = .15){
+dtaPrediction = function(Y,alpha = .15){
 
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
@@ -143,12 +139,8 @@ dtaPrediction = function(Y,epsilon = .15){
 
   # obtain final solution
   S = sort(c(b1,b2))
-  k = floor(epsilon*(N+1))
+  k = floor(alpha*(N+1))
   int = c(S[k],S[2*N-k+1])
-
-  # if ( k == 0 ) {
-  #   stop("ALPHA is set too low.")
-  # }
 
   out = list("bounds" = int, "coverage" = (1-k/(N+1))*100,
              "data" = Y, "class" = "continuous")
@@ -163,10 +155,10 @@ dtaPrediction = function(Y,epsilon = .15){
 #' This function computes a prediction interval under assumed normality.
 #'
 #' @param Y Observed data vector
-#' @param epsilon Prediction error rate
+#' @param alpha Prediction error rate
 #' @return  pred object
 #' @export
-normalPrediction = function(Y,epsilon = .15){
+normalPrediction = function(Y,alpha = .15){
 
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
@@ -178,14 +170,14 @@ normalPrediction = function(Y,epsilon = .15){
   N = length(Y)
   ybar = mean(Y)
 
-  tval = qt(1-epsilon/2,N-1)
+  tval = qt(1-alpha/2,N-1)
 
   sbar = sd(Y) # use county specific sd
 
   ci_help = tval * sbar * sqrt(1/N+1)
 
   out = list("bounds" = c(ybar - ci_help,ybar + ci_help),
-             "coverage" = (1-epsilon)*100,
+             "coverage" = (1-alpha)*100,
              "data" = Y, "class" = "continuous")
 
   class(out) = 'pred'
