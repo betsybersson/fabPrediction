@@ -61,5 +61,5 @@ if (obj$class=="continuous"){
 rdirichlet = function(gamma){
   Y = sapply(gamma,function(j)rgamma(1,j,1))
   
-  return(Y/sum(Y))
+  Y/sum(Y)
 }
