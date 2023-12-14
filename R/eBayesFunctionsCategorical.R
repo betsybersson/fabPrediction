@@ -119,6 +119,7 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
   return(alpha_t)
   
 }
+
 #' Obtain gradient of the marginal Dirichlet-multinomial likelihood
 #'
 #'
@@ -143,6 +144,7 @@ g_k = unlist(
 
 return(g_k)
 }
+
 #' Obtain Hessian of the marginal Dirichlet-multinomial likelihood
 #'
 #'
@@ -171,6 +173,7 @@ polyaHessian= function(D, gamma,
   
   return(list("q.diag" = q.diag,"z" = z,"H" = H))
 }
+
 #' Obtain inital guess of MLE of the marginal Dirichlet-multinomial likelihood
 #'
 #' Method of moment matching to obtain an initial guess of the MLE, as in Minka (2000).
