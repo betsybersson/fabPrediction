@@ -4,7 +4,7 @@
 \alias{plot.pred}
 \title{Plot a \code{pred} object}
 \usage{
-\method{plot}{pred}(obj, main = "", xlab = "")
+\method{plot}{pred}(obj, main = "", xlab = "", plot.all = T)
 }
 \arguments{
 \item{obj}{pred object- a list classified as pred containing objects data and bound}
@@ -12,6 +12,8 @@
 \item{main}{plot title}
 
 \item{xlab}{xaxis title}
+
+\item{plot.all}{(optional) T displays all categories when plotting a categorical prediction set.}
 }
 \value{
 capability to plot pred object. More details: the command \code{plot(obj)} returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval
