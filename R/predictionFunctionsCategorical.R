@@ -21,7 +21,7 @@ predictionSet = function(Y,method = "FAB",
     out = fabCategoricalPrediction(Y,alpha = alpha,gamma = rep(0,length(Y)),
                                    category_names = category_names)
   } else if (method == "Bayes"){
-    out = bayesMNPrediction(Y,alpha = alpha,gamma = gamma,
+    out = bayesMultinomialPrediction(Y,alpha = alpha,gamma = gamma,
                             category_names = category_names)
   } else {
     stop(paste0("Error! Method ",method," is not a valid option!"))
@@ -125,7 +125,7 @@ bayesMultinomialPrediction = function(Y,alpha = .15,
 
   ## test
   pz.out  = array(NA,dim=K)
-  names(pz.out) = cat_names
+  names(pz.out) = category_names
   for ( i in 1:K ){
 
     pz.out[i] = ((Y[i] + gamma[i]) >= (Y + gamma)) %*% (Y + gamma) / (N+sum(gamma))
