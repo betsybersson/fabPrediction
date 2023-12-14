@@ -84,7 +84,7 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
       
     }else if (method == "precision_only"){
       # update precision- alpha0
-      gprime.k = sum(unlist(mclapply(1:K,function(k) 
+      gprime.k = sum(unlist(parallel::mclapply(1:K,function(k) 
         sum(theta0_t[k] * digamma(D[,k]+ alpha0_t * theta0_t[k]) -
               theta0_t[k] * digamma(alpha0_t * theta0_t[k])))))/
         sum(digamma(Nj + alpha0_t) - digamma(alpha0_t))
@@ -136,7 +136,7 @@ polyaGradient = function(D, gamma,
 gamma0 = sum(gamma)
 
 g_k = unlist(
-  mclapply(1:K,function(k) sum(digamma(gamma0) -
+  parallel::mclapply(1:K,function(k) sum(digamma(gamma0) -
                                  digamma(gamma0 + Nj) +
                                  digamma(D[,k] + gamma[k]) -
                                  digamma(gamma[k])))
@@ -163,7 +163,7 @@ polyaHessian= function(D, gamma,
   z = sum(trigamma(gamma0) - 
             trigamma(gamma0 + Nj))
   
-  q.diag = unlist(mclapply(1:K,function(k)
+  q.diag = unlist(parallel::mclapply(1:K,function(k)
     sum(trigamma(D[,k] + gamma[k]) -
           trigamma(gamma[k]))
   ))
