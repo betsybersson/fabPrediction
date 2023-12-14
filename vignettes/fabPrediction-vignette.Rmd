@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(devtools)
+library(fabPrediction)
 ```
 
 
@@ -41,7 +42,7 @@ data(W)
 ```
 
 
-### Single Population Analysis
+### Single Group Analysis
 
 If we have prior information regarding the population mean of the response, we can obtain FAB prediction regions for one county. 
 
@@ -90,9 +91,9 @@ predictionInterval(y_county9,method = "Bayes",alpha = .15,
 ```
 
 
-### Multiple Population Analysis
+### Multiple Group Analysis
 
-The package also features capability to handle multiple populations. Spatial relationships among the populations and covariates can be used to estimate conformal parameters. 
+The package also features capability to handle multiple groups. Spatial relationships among the groups and covariates can be used to estimate conformal parameters. 
 
 ```{r, fig.height=4, fig.width = 6,warning=F}
 params = EB_values(9,radon$radon,radon$group,W,X=rep(1,nrow(W)))
@@ -103,5 +104,38 @@ plot(predictionInterval(y_county9,method = "FAB",alpha = .15,
 
 
 
+## Demo - Categorical Data
+
+We will demonstrate constructing prediction sets for categorical data on a simulated dataset consisting of 50 categories and 5 groups with varying within-group sample sizes.
+
+```{r catdata}
+N.groups = c(10,50,75,100,150)
+
+set.seed(1)
+prob = rdirichlet(50:1)
+y = t(sapply(N.groups,function(j)rmultinom(1,j,prob)))
+```
 
 
+### Single Group Analysis
+
+If we have prior information regarding the prior concentration parameter for a given group, we can construct a FAB prediction set for that group.
+
+```{r}
+y_group3 = y[3,]
+fab.set = predictionSet(y_group3,method = "FAB",
+                        gamma = c(50:1))
+```
+
+And, we can plot the categories included in the prediction set:
+
+```{r}
+plot(fab.set, main = "FAB Prediction Set for Group 3")
+```
+
+Similarly, we can construct and plot a direct prediction set for the same data:
+
+```{r}
+plot(predictionSet(y_group3,method = "direct"), 
+     main = "Direct Prediction Set for Group 3")
+```
