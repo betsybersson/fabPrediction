@@ -130,12 +130,42 @@ fab.set = predictionSet(y_group3,method = "FAB",
 And, we can plot the categories included in the prediction set:
 
 ```{r}
-plot(fab.set, main = "FAB Prediction Set for Group 3")
+plot(fab.set, main = "FAB Prediction Set for Group 3",
+     cex.axis=.5)
 ```
 
 Similarly, we can construct and plot a direct prediction set for the same data:
 
 ```{r}
 plot(predictionSet(y_group3,method = "direct"), 
-     main = "Direct Prediction Set for Group 3")
+     main = "Direct Prediction Set for Group 3",
+     cex.axis=.5)
 ```
+
+We can also construct a Bayesian prediction set, using the same prior as before in the FAB approach. Note, though, that this prediction set does not necessarily have the guaranteed coverage rate.
+
+```{r}
+plot(predictionSet(y_group3,method = "Bayes",gamma = c(50:1)), 
+     main = "Bayes Prediction Set for Group 3",
+     cex.axis=.5)
+```
+
+
+
+### Multiple Group Analysis
+
+The package also features capability to handle multiple groups. To construct a prediction set for group 3 in this way, the prior concentration $\gamma$ can be learned from all groups except 3. 
+
+```{r}
+gamma0 = polyaMLE(y[-3,])
+```
+
+This prior can be used as the prior information in constructing a FAB prediction set.
+
+```{r}
+plot(predictionSet(y_group3,method = "FAB",gamma = gamma0), 
+     main = "FAB Prediction Set for Group 3 using Indirect Information",
+     cex.axis=.5)
+```
+
+
