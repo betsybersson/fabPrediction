@@ -144,7 +144,7 @@ EB_values = function(j,Y,group,W = NA,X = NA){
       warning("Please input the non-row-standardized adjacency matrix!")
     }
 
-    W.stand = diag(1/rowSums(W)) %*% W #row standardize
+    W.stand = row_standardize(W) #row standardize
 
     out = plugin_values(Y[j!=group],rep(1:(J-1),ns[-j]),
                         W.stand[-j,-j],X[-j,,drop=F])

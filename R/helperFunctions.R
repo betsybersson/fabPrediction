@@ -9,6 +9,16 @@ eye = function(N){
   diag(rep(1,N))
 }
 
+#' Row standardize a matrix
+#'
+#'
+#' @param W matrix
+#' @return row-standardized matrix
+#' @export
+row_standardize = function(W){
+  diag(1/rowSums(W)) %*% W
+}
+
 #' Plot a `pred` object
 #'
 #'
