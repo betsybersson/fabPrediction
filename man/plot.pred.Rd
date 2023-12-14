@@ -4,14 +4,10 @@
 \alias{plot.pred}
 \title{Plot a \code{pred} object}
 \usage{
-\method{plot}{pred}(obj, main = "", xlab = "", plot.all = T)
+\method{plot}{pred}(obj, plot.all = T, main = "", xlab = "", cex.axis = 1)
 }
 \arguments{
 \item{obj}{pred object- a list classified as pred containing objects data and bound}
-
-\item{main}{plot title}
-
-\item{xlab}{xaxis title}
 
 \item{plot.all}{(optional) T displays all categories when plotting a categorical prediction set.}
 }

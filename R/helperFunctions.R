@@ -13,15 +13,14 @@ eye = function(N){
 #'
 #'
 #' @param obj pred object- a list classified as pred containing objects data and bound
-#' @param main plot title
-#' @param xlab xaxis title
 #' @param plot.all (optional) T displays all categories when plotting a categorical prediction set.
 #' @return capability to plot pred object. More details: the command `plot(obj)` returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval
 #' @export
 plot.pred = function(obj,
+                     plot.all = T,
                      main="",
                      xlab="",
-                     plot.all = T){
+                     cex.axis=1){
 
 if (obj$class=="continuous"){
   plot.range = range(obj$data,obj$bound)
@@ -42,9 +41,10 @@ if (obj$class=="continuous"){
   if (plot.all == T){
     plot(mle,
          ylab = "Empirical Probability Mass",
+         col = cols,
          xlab = xlab,
          main = main,
-         col = cols)
+         cex.axis = cex.axis)
   } else {
     ### add code to plot only categories included in set- for space
   }
