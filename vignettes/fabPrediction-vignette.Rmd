@@ -1,6 +1,7 @@
 ---
-title: "Using the fabPrediction Package to obtain Nonparametric Prediction Regions"
+title: "Using the fabPrediction Package to obtain Nonparametric Prediction Regions Using Indirect Information"
 author: "Elizabeth Bersson"
+date: December 2023
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -31,7 +32,7 @@ library(fabPrediction)
 ```
 
 
-## Demo - Countinuous Data
+## Demo - Continuous Data
 
 
 We will demonstrate FAB prediction with log radon values from counties in Minnesota. See [Price et al., 1996](https://pubmed.ncbi.nlm.nih.gov/8919076/). 
@@ -72,14 +73,14 @@ So, with at least $85\%$ probability, the next observed radon value in County 9 
 
 ```{r plotfab, fig.height=4, fig.width = 6,warning=F}
 plot(fab.region,
-     main="FAB",xlab="log(radon)")
+     main="FAB Prediction Interval For County 9",xlab="log(radon)")
 ```
 
 We can easily compare this the distance-to-average conformal prediction region.
 
 ```{r plotdta, fig.height=4, fig.width = 6,warning=F}
 plot(predictionInterval(y_county9,method = "DTA",alpha = .15),
-     main="DTA",xlab="log(radon)")
+     main="DTA Prediction Interval For County 9",xlab="log(radon)")
 ```
 
 The functions include capabilities to obtain and plot standard frequentist and Bayesian prediction intervals based on a normal model. Unlike the FAB and DTA methods, the coverage of these methods rely on, among other things, accuracy of distributional assumptions.
@@ -99,7 +100,7 @@ The package also features capability to handle multiple groups. Spatial relation
 params = EB_values(9,radon$radon,radon$group,W,X=rep(1,nrow(W)))
 plot(predictionInterval(y_county9,method = "FAB",alpha = .15,
                         mu = params$mu, tau2 = params$tau2),
-     main="FAB PI For County 9", xlab="log(radon)")
+     main="FAB Prediction Interval For County 9 Using Indirect Information", xlab="log(radon)")
 ```
 
 
@@ -119,6 +120,12 @@ y = t(sapply(N.groups,function(j)rmultinom(1,j,prob)))
 
 ### Single Group Analysis
 
+We construct prediction sets for categorical data based on a Multinomial-Dirichlet working model:
+\begin{aligned}
+y\sim{}& MN_k(\theta,N)\\
+\theta\sim{}& Dirichlet_K(\gamma).
+\end{aligned}
+
 If we have prior information regarding the prior concentration parameter for a given group, we can construct a FAB prediction set for that group.
 
 ```{r}
@@ -129,22 +136,22 @@ fab.set = predictionSet(y_group3,method = "FAB",
 
 And, we can plot the categories included in the prediction set:
 
-```{r}
+```{r, fig.height=4, fig.width = 6,warning=F}
 plot(fab.set, main = "FAB Prediction Set for Group 3",
      cex.axis=.5)
 ```
 
 Similarly, we can construct and plot a direct prediction set for the same data:
 
-```{r}
+```{r, fig.height=4, fig.width = 6,warning=F}
 plot(predictionSet(y_group3,method = "direct"), 
      main = "Direct Prediction Set for Group 3",
      cex.axis=.5)
 ```
 
-We can also construct a Bayesian prediction set, using the same prior as before in the FAB approach. Note, though, that this prediction set does not necessarily have the guaranteed coverage rate.
+We can also construct a Bayesian prediction set based on this model, using the same prior as before in the FAB approach. Note, though, that this prediction set does not necessarily maintain the nominal coverage rate.
 
-```{r}
+```{r, fig.height=4, fig.width = 6,warning=F}
 plot(predictionSet(y_group3,method = "Bayes",gamma = c(50:1)), 
      main = "Bayes Prediction Set for Group 3",
      cex.axis=.5)
@@ -154,15 +161,15 @@ plot(predictionSet(y_group3,method = "Bayes",gamma = c(50:1)),
 
 ### Multiple Group Analysis
 
-The package also features capability to handle multiple groups. To construct a prediction set for group 3 in this way, the prior concentration $\gamma$ can be learned from all groups except 3. 
+The package also features capability to handle multiple groups. To construct a prediction set for group 3 in this way, the prior concentration $\gamma$ can be estimated with data from all groups except 3. 
 
-```{r}
-gamma0 = polyaMLE(y[-3,])
+```{r, cache=T}
+gamma0 = polyaMLE(y[-3,],method="separate")
 ```
 
 This prior can be used as the prior information in constructing a FAB prediction set.
 
-```{r}
+```{r, fig.height=4, fig.width = 6,warning=F}
 plot(predictionSet(y_group3,method = "FAB",gamma = gamma0), 
      main = "FAB Prediction Set for Group 3 using Indirect Information",
      cex.axis=.5)
