@@ -1,6 +1,6 @@
 # fabPrediction
 
-An **R** package for onstructing frequentist prediction regions using indirect information.
+An **R** package for constructing frequentist prediction regions using indirect information.
 
 ## References
 
