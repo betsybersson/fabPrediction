@@ -34,7 +34,6 @@ We wlil demonstrate usage on a random normal sample of length 10.
 
 ``` r
 y = rnorm(10)
-y
 ```
 
 A FAB prediction interval with 1-`alpha` coverage can be constructed for these data based on a prior parameters `mu` and `tau2` from a Normal-Normal working model:
@@ -43,7 +42,6 @@ A FAB prediction interval with 1-`alpha` coverage can be constructed for these d
 y_PI = predictionInterval(y, method = "FAB",
       alpha = .05,
       mu = 0, tau2 = 1/2)
-y_PI$bounds
 ```
 
 and plotted:
@@ -59,7 +57,6 @@ We wlil demonstrate usage on a random multinomial sample for 10 categories based
 ``` r
 gamma = c(10:1)
 y = c(rmultinom(1,20,rdirichlet(gamma)))
-y
 ```
 
 A FAB prediction set with 1-`alpha` coverage can be constructed for these data based on an estimate of the prior parameter `gamma` from a Multinomial-Dirichlet working model:
@@ -68,7 +65,6 @@ A FAB prediction set with 1-`alpha` coverage can be constructed for these data b
 y_PS = predictionSet(y, method = "FAB",
       alpha = .15,
       gamma = gamma)
-y_PS$set
 ```
 
 And this prediction set can be plotted:
