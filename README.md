@@ -73,5 +73,9 @@ And this prediction set can be plotted:
 plot(y_PS)
 ```
 
+## Examples
+
+- [vignette](https://rpubs.com/betsybersson/1158666)
+
 
 
