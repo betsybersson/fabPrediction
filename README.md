@@ -73,11 +73,5 @@ And this prediction set can be plotted:
 plot(y_PS)
 ```
 
-<> ### Examples
-
-<> - vignette
-<> - [Radon prediction in Bersson and Hoff (2022)](https://github.com/betsybersson/fab_sap/blob/main/radon_prediction.R) - need to update code to use the package...
-
-
 
 
