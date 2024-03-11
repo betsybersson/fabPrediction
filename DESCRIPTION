@@ -3,7 +3,13 @@ Title: Compute FAB Conformal Prediction Intervals
 Version: 0.0.0.9000
 Authors@R: 
     person("Elizabeth", "Bersson", , "elizabeth.bersson@duke.edu", role = c("aut", "cre"))
-Description: Computes and plots FAB conformal prediction intervals based on prior information. For multiple populations or small areas, the prior information is obtained through empirical Bayesian estimation. See Bersson and Hoff (2022) <arXiv:2204.08122> "Optimal Conformal Prediction for Small Areas". 
+Description: A package for computing and plotting
+  prediction intervals for numerical data or prediction
+  sets for categorical data using prior information. 
+  Empirical Bayes procedures to estimate the prior information
+  from multi-group data are included. See, e.g.,
+  Bersson and Hoff (2022) <arXiv:2204.08122> "Optimal 
+  Conformal Prediction for Small Areas". 
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
@@ -13,3 +19,5 @@ RoxygenNote: 7.2.3
 Imports: 
 	sae,
 	parallel
+URL: https://github.com/betsybersson/fabPrediction
+BugReports: https://github.com/betsybersson/fabPrediction/issues
