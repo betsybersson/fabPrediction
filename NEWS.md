@@ -1,3 +1,3 @@
-# fabPrediction (development version)
+# fabPrediction 1.0.0
 
 * Initial CRAN submission.

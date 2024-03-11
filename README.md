@@ -11,7 +11,8 @@ Bersson and Hoff (2022). [Optimal Conformal Prediction for Small Areas](https://
 ## Installation
 
 ``` r
-devtools::install_github("betsybersson/fabPrediction")  
+install_packages("fabPrediction")  
+library(fabPrediction)
 ```
 
 ## Usage
