@@ -97,7 +97,7 @@ predictionInterval(y_county9,method = "Bayes",alpha = .15,
 The package also features capability to handle multiple groups. Spatial relationships among the groups and covariates can be used to estimate conformal parameters. 
 
 ```{r, fig.height=4, fig.width = 6,warning=F}
-params = EB_values(9,radon$radon,radon$group,W,X=rep(1,nrow(W)))
+params = fayHerriotEB(9,radon$radon,radon$group,W,X=rep(1,nrow(W)))
 plot(predictionInterval(y_county9,method = "FAB",alpha = .15,
                         mu = params$mu, tau2 = params$tau2),
      main="FAB Prediction Interval For County 9 Using Indirect Information", xlab="log(radon)")

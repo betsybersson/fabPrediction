@@ -13,7 +13,7 @@
 polyaMLE = function(D, init = NA, method = "Newton_Raphson",
                     epsilon = .0001,
                     print_progress = F) {
-
+  
   ## if a column is all 0s, remove it from analysis and set prior to 0
   zeros.ind = which(colSums(D)==0)
   if (length(zeros.ind)>0){
@@ -23,7 +23,7 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
   }
   
   if (is.na(init)){
-    init = init.MoM(D) 
+    init = initMoM(D) 
   }
   
   # grab helpers
@@ -56,8 +56,8 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
       # get helper
       alpha0t = sum(alpha_t)
       gprime.k = unlist(parallel::mclapply(1:K,function(k) sum(digamma(D[,k]+alpha_t[k]) -
-                                                       digamma(alpha_t[k]))/
-                                   sum(digamma(Nj + alpha0t) - digamma(alpha0t))
+                                                                 digamma(alpha_t[k]))/
+                                             sum(digamma(Nj + alpha0t) - digamma(alpha0t))
       ))
       
       # update alpha
@@ -118,75 +118,4 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
   
   return(alpha_t)
   
-}
-
-#' Obtain gradient of the marginal Dirichlet-multinomial likelihood
-#'
-#'
-#' @param D matrix (JxK) of counts; each row is a sample from a MN distribution with K categories
-#' @param gamma current value of prior concentration parameter
-#' @param Nj sample sizes of the J groups
-#' @param K number of categories
-#' @return gradient
-#' @export
-polyaGradient = function(D, gamma,
-                         Nj = rowSums(D),
-                         K = ncol(D)){
-## helpers
-gamma0 = sum(gamma)
-
-g_k = unlist(
-  parallel::mclapply(1:K,function(k) sum(digamma(gamma0) -
-                                 digamma(gamma0 + Nj) +
-                                 digamma(D[,k] + gamma[k]) -
-                                 digamma(gamma[k])))
-)
-
-return(g_k)
-}
-
-#' Obtain Hessian of the marginal Dirichlet-multinomial likelihood
-#'
-#'
-#' @param D matrix (JxK) of counts; each row is a sample from a MN distribution with K categories
-#' @param gamma current value of prior concentration parameter
-#' @param Nj sample sizes of the J groups
-#' @param K number of categories
-#' @return Hessian
-#' @export
-polyaHessian= function(D, gamma,
-                       Nj = rowSums(D),
-                       K = ncol(D)){
-  ## helpers
-  gamma0 = sum(gamma)
-  
-  z = sum(trigamma(gamma0) - 
-            trigamma(gamma0 + Nj))
-  
-  q.diag = unlist(parallel::mclapply(1:K,function(k)
-    sum(trigamma(D[,k] + gamma[k]) -
-          trigamma(gamma[k]))
-  ))
-  Q = diag(q.diag)
-  
-  H = Q + z
-  
-  return(list("q.diag" = q.diag,"z" = z,"H" = H))
-}
-
-#' Obtain inital guess of MLE of the marginal Dirichlet-multinomial likelihood
-#'
-#' Method of moment matching to obtain an initial guess of the MLE, as in Minka (2000).
-#'
-#' @param D matrix (JxK) of counts; each row is a sample from a MN distribution with K categories
-#' @return Hessian
-#' @export
-init.MoM = function(D){
-  p = t(apply(D,1,function(l)l/sum(l)))
-  exp.p = colMeans(p)
-  exp2.p = colMeans(p*p)
-  ok = exp.p>0
-  sum.as = (exp.p[ok] - exp2.p[ok]) / (exp2.p[ok] - exp.p[ok]^2)
-  init = exp.p * median(sum.as)
-  return(init)
 }
