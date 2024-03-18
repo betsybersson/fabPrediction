@@ -24,4 +24,3 @@ Suggests:
   knitr
 URL: https://github.com/betsybersson/fabPrediction
 BugReports: https://github.com/betsybersson/fabPrediction/issues
-VignetteBuilder: knitr
