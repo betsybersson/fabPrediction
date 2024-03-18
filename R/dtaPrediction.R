@@ -6,7 +6,7 @@
 #' @param Y Observed data vector
 #' @param alpha Prediction error rate
 #' @return  pred object
-#' @imports package
+#' @importFrom package function
 #' @export
 dtaPrediction = function(Y,alpha = .15){
   
