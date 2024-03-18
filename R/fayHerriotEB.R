@@ -9,8 +9,6 @@
 #' @param W Non-standardized adjacency matrix
 #' @param X Group-level covariates
 #' @return empirical Bayesian estimates of population mean and it's variance
-#' @imports stats
-#' @imports graphics
 #' 
 #' @export
 fayHerriotEB = function(j,Y,group,W = NA,X = NA){
