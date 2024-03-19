@@ -169,7 +169,7 @@ plot(predictionSet(y_group3,method = "Bayes",gamma = c(50:1)),
 The package also features capability to handle multiple groups. To construct a prediction set for group 3 in this way, the prior concentration $\gamma$ can be estimated with data from all groups except 3. 
 
 ```{r computeMLE, cache=T}
-gamma0 = polyaMLE(y[-3,],method="separate")
+gamma0 = polyaMLE(y[-3,], method="separate")
 ```
 
 This prior can be used as the prior information in constructing a FAB prediction set.
@@ -179,5 +179,3 @@ plot(predictionSet(y_group3,method = "FAB",gamma = gamma0),
      main = "FAB Prediction Set for Group 3 using Indirect Information",
      cex.axis=.5)
 ```
-
-
