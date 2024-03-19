@@ -1,6 +1,6 @@
 Package: fabPrediction
 Title: Compute FAB Conformal Prediction Intervals
-Version: 0.0.1
+Version: 1.0.0
 Authors@R: 
     person("Elizabeth", "Bersson",
     email = "elizabeth.bersson@duke.edu", 
