@@ -22,5 +22,6 @@ Imports:
     graphics
 Suggests:
   knitr
+VignetteBuilder: knitr
 URL: https://github.com/betsybersson/fabPrediction
 BugReports: https://github.com/betsybersson/fabPrediction/issues

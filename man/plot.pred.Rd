@@ -9,7 +9,11 @@
 \arguments{
 \item{obj}{pred object- a list classified as pred containing objects data and bound}
 
-\item{plot.all}{(TO BE ADDED) T displays all categories when plotting a categorical prediction set.}
+\item{main}{(optional) plot title}
+
+\item{xlab}{(optional) x-axis title}
+
+\item{cex.axis}{(optional) adjust axis tick size}
 }
 \value{
 capability to plot pred object. More details: the command \code{plot(obj)} returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval

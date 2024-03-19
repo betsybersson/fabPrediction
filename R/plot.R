@@ -2,7 +2,10 @@
 #'
 #'
 #' @param obj pred object- a list classified as pred containing objects data and bound
-#' @param plot.all (TO BE ADDED) T displays all categories when plotting a categorical prediction set.
+#' @param main (optional) plot title
+#' @param xlab (optional) x-axis title
+#' @param cex.axis (optional) adjust axis tick size
+#' 
 #' @return capability to plot pred object. More details: the command `plot(obj)` returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval
 #' @export
 plot.pred = function(obj,
@@ -27,7 +30,7 @@ plot.pred = function(obj,
     names(mle) = cat.names
   
   
-    plot.all = T
+    plot.all = T # plot displays all categories when plotting a categorical prediction set.
     if (plot.all == T){
       plot(mle,
            ylab = "Empirical Probability Mass",

@@ -4,7 +4,7 @@ author: "Elizabeth Bersson"
 date: December 2023
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{fabPrediction Vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,7 +26,7 @@ The package also includes capabilities to obtain standard direct and Bayesian pr
 
 ## Installation
 
-```{r devtools, eval=FALSE}
+```{r devtools, eval = FALSE}
 devtools::install_github("betsybersson/fabPrediction")
 library(fabPrediction)
 ```

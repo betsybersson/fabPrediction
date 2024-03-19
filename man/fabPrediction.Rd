@@ -13,11 +13,10 @@ from multi-group data are included.
 }
 \references{
 E. Bersson and P.D. Hoff. (2023) Frequentist Prediction Sets for
-Species Abundance using Indirect Information. Preprint. \cr
-\url{arXiv:2311.15860}
+Species Abundance using Indirect Information. Preprint.
 
 E. Bersson and P.D. Hoff. (2023) Optimal Conformal Prediction for Small Areas.
-Journal of Survey Statistics and Methodology, forthcoming. \cr \url{arXiv:2204.08122}
+Journal of Survey Statistics and Methodology, forthcoming.
 }
 \author{
 Elizabeth Bersson, \cr Maintainer: Elizabeth Bersson \href{mailto:elb75@duke.edu}{elb75@duke.edu}
