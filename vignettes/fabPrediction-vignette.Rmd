@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 library(devtools)
-library(fabPrediction)
 ```
 
 
@@ -26,11 +25,17 @@ The package also includes capabilities to obtain standard direct and Bayesian pr
 
 ## Installation
 
-```{r devtools, eval = FALSE}
+```{r devtools}
 devtools::install_github("betsybersson/fabPrediction")
 library(fabPrediction)
 ```
 
+or 
+
+```{r cran, eval = FALSE}
+install_packages("fabPrediction")
+library(fabPrediction)
+```
 
 ## Demo - Continuous Data
 
