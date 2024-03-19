@@ -1,3 +1,5 @@
+# fabPrediction 2.0.0
+
 # fabPrediction 1.2.0
 
 # fabPrediction 1.1.0
