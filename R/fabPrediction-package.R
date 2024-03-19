@@ -23,6 +23,8 @@
 #' @keywords package prediction
 #' @import stats
 #' @import graphics
+#' @import grDevices
 #' 
+#' @family pred methods
 #' 
 NULL

@@ -21,5 +21,6 @@ Journal of Survey Statistics and Methodology, forthcoming.
 \author{
 Elizabeth Bersson, \cr Maintainer: Elizabeth Bersson <elb75@duke.edu>
 }
+\concept{pred methods}
 \keyword{package}
 \keyword{prediction}

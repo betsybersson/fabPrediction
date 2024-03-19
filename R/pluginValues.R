@@ -72,7 +72,7 @@ pluginValues = function(Y,group,W = NA,X = NA){
     df = data.frame(cbind(c(ybar),c(s2/N),X))
     colnames(df)[1:2] = c("Y","VarCol")
     
-    resultML = sae::eblupSFH(Y ~ . - VarCol - 1, VarCol, as.data.frame(W),
+    resultML = sae::eblupSFH(df$Y ~ . - df$VarCol - 1, df$VarCol, as.data.frame(W),
                              method="ML",data = df)
     
     theta.eb = resultML$eblup
