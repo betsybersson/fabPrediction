@@ -2,7 +2,9 @@ Package: fabPrediction
 Title: Compute FAB Conformal Prediction Intervals
 Version: 5.0.0
 Authors@R: 
-    person("Elizabeth", "Bersson", , "elizabeth.bersson@duke.edu", role = c("aut", "cre", "cph"))
+    person("Elizabeth", "Bersson",
+    email = "elizabeth.bersson@duke.edu", 
+    role = c("aut", "cre", "cph"))
 Description: A package for computing and plotting
   prediction intervals for numerical data or prediction
   sets for categorical data using prior information. 
@@ -12,16 +14,11 @@ Description: A package for computing and plotting
   Conformal Prediction for Small Areas". 
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-    sae (>= 1.3),
+    sae,
     parallel,
     stats,
     graphics
-Suggests:
-  knitr
-VignetteBuilder: knitr
 URL: https://github.com/betsybersson/fabPrediction
 BugReports: https://github.com/betsybersson/fabPrediction/issues

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.pred}
 \alias{plot.pred}
-\title{Plot a \code{pred} object}
+\title{Plot a `pred` object}
 \usage{
 \method{plot}{pred}(obj, main = "", xlab = "", cex.axis = 1)
 }
@@ -16,8 +16,8 @@
 \item{cex.axis}{(optional) adjust axis tick size}
 }
 \value{
-capability to plot pred object. More details: the command \code{plot(obj)} returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval
+capability to plot pred object. More details: the command `plot(obj)` returns a line plot with tick marks denoting observed data points and a red band denoting the prediction interval
 }
 \description{
-Plot a \code{pred} object
+Plot a `pred` object
 }
