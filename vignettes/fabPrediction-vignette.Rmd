@@ -12,13 +12,14 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
-library(devtools)
-# CRAN OMP THREAD LIMIT
-Sys.setenv("OMP_THREAD_LIMIT" = 2)
 ```
 
+```{r hiddenlibrary, include = FALSE}
+library(devtools)
+```
 
 The `fabPrediction` package provides functions to implement FAB conformal prediction algorithms for continuous data as in [Bersson and Hoff, 2022](https://arxiv.org/pdf/2204.08122.pdf)
 and categorical counts data as in [Bersson and Hoff, 2023](https://arxiv.org/pdf/2311.15860.pdf).
