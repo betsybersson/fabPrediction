@@ -9,7 +9,8 @@ predictionInterval(Y, method = "FAB", alpha = 0.15, mu = 0, tau2 = 1)
 \arguments{
 \item{Y}{Observed data vector}
 
-\item{method}{Choice of prediction method. Options include FAB, DTA, direct, Bayes.}
+\item{method}{Choice of prediction method. Options include FAB, DTA, direct,
+Bayes.}
 
 \item{alpha}{Prediction error rate}
 
@@ -22,4 +23,19 @@ pred object containing prediction interval bounds and interval coverage
 }
 \description{
 This function computes a prediction interval from a number of methods.
+}
+\examples{
+
+# example data
+data(radon)
+y_county9 = radon$radon[radon$group==9]
+
+fab.region = predictionInterval(y_county9,
+  method = "FAB",
+  alpha = .15,
+  mu = 0.5,tau2 = 1)
+fab.region$bounds
+plot(fab.region)
+
+
 }

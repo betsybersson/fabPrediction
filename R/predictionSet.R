@@ -7,7 +7,21 @@
 #' @param alpha Prediction mis-coverage rate
 #' @param gamma Dirichlet prior concentration for FAB/Bayes methods
 #' @param category_names Category names (optional)
+#' 
 #' @return pred object containing prediction set and interval coverage
+#' 
+#' @examples
+#' 
+#' # obtain example categorical data
+#' set.seed(1)
+#' prob = rdirichlet(50:1)
+#' y = rmultinom(1,15,prob)
+#' 
+#' fab.set = predictionSet(y,
+#'   method = "FAB",
+#'   gamma = c(50:1))
+#' plot(fab.set)
+#' 
 #' @export
 predictionSet = function(Y,method = "FAB",
                          alpha = .15,

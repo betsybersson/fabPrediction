@@ -29,3 +29,16 @@ pred object containing prediction set and interval coverage
 \description{
 This function computes a prediction set from a number of methods.
 }
+\examples{
+
+# obtain example categorical data
+set.seed(1)
+prob = rdirichlet(50:1)
+y = rmultinom(1,15,prob)
+
+fab.set = predictionSet(y,
+  method = "FAB",
+  gamma = c(50:1))
+plot(fab.set)
+
+}

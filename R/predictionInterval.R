@@ -3,11 +3,28 @@
 #' This function computes a prediction interval from a number of methods.
 #'
 #' @param Y Observed data vector
-#' @param method Choice of prediction method. Options include FAB, DTA, direct, Bayes.
+#' @param method Choice of prediction method. Options include FAB, DTA, direct,
+#'  Bayes.
 #' @param alpha Prediction error rate
 #' @param mu Prior expected mean of the population mean
 #' @param tau2 Prior expected variance of the population mean
+#' 
 #' @return pred object containing prediction interval bounds and interval coverage
+#' 
+#' @examples
+#' 
+#' # example data
+#' data(radon)
+#' y_county9 = radon$radon[radon$group==9]
+#' 
+#' fab.region = predictionInterval(y_county9,
+#'   method = "FAB",
+#'   alpha = .15,
+#'   mu = 0.5,tau2 = 1)
+#' fab.region$bounds
+#' plot(fab.region)
+#' 
+#' 
 #' @export
 predictionInterval = function(Y,method = "FAB",
                               alpha = .15,
