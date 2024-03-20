@@ -10,7 +10,7 @@ Description: Functions to compute and plot
   sets for categorical data using prior information. 
   Empirical Bayes procedures to estimate the prior information
   from multi-group data are included. See, e.g.,
-  Bersson and Hoff (2022) <arXiv:2204.08122> "Optimal 
+  'Bersson' and Hoff (2022) <arXiv:2204.08122> "Optimal 
   Conformal Prediction for Small Areas". 
 License: GPL-3
 Encoding: UTF-8
