@@ -15,7 +15,7 @@ bayesMultinomialPrediction = function(Y,alpha = .15,
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
     Y = unname(Y)
-    print("Y converted to vector!")
+    message("Y converted to vector!")
   }
 
   K = length(Y)

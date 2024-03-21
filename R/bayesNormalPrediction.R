@@ -13,7 +13,7 @@ bayesNormalPrediction = function(Y,alpha = .15,mu = 0,tau2 = 1){
   if (!is.vector(Y)){
     Y = unlist(as.vector(Y))
     Y = unname(Y)
-    print("Y converted to vector!")
+    message("Y converted to vector!")
   }
   
   N = length(Y)

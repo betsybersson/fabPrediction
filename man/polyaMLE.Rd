@@ -9,7 +9,7 @@ polyaMLE(
   init = NA,
   method = "Newton_Raphson",
   epsilon = 1e-04,
-  print_progress = F
+  print_progress = FALSE
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ polyaMLE(
 
 \item{epsilon}{convergence diagnostic}
 
-\item{print_progress}{if T, print progress to screen}
+\item{print_progress}{if TRUE, print progress to screen}
 }
 \value{
 mle of prior concentration from marginal Dirichlet-multinomial likelihood

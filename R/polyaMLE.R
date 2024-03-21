@@ -7,12 +7,12 @@
 #' @param init If NA, use method moment matching procedure to obtain good init values
 #' @param method "Newton_Raphson", "fixed_point", "separate", "precision_only"
 #' @param epsilon convergence diagnostic
-#' @param print_progress if T, print progress to screen
+#' @param print_progress if TRUE, print progress to screen
 #' @return mle of prior concentration from marginal Dirichlet-multinomial likelihood
 #' @export
 polyaMLE = function(D, init = NA, method = "Newton_Raphson",
                     epsilon = .0001,
-                    print_progress = F) {
+                    print_progress = FALSE) {
   
   ## if a column is all 0s, remove it from analysis and set prior to 0
   zeros.ind = which(colSums(D)==0)
@@ -40,7 +40,7 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
       sum(alpha.star * (digamma(nn + alpha.star) - digamma(alpha.star)))
     }
   }
-  converged = F
+  converged = FALSE
   # iterate until convergence
   while (!converged) {
     
@@ -100,7 +100,7 @@ polyaMLE = function(D, init = NA, method = "Newton_Raphson",
     
     
     # check convergence
-    converged = ifelse(all(abs(alpha_tP1-alpha_t)<epsilon),T,F)
+    converged = ifelse(all(abs(alpha_tP1-alpha_t)<epsilon),TRUE,FALSE)
     alpha_t = ifelse(alpha_tP1<0,1e-10,alpha_tP1) # enforce bounded below by 0 constraint
     
     if (print_progress){
