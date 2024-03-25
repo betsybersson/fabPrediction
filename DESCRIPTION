@@ -1,6 +1,6 @@
 Package: fabPrediction
-Title: Compute FAB (frequentist and Bayes) Conformal Prediction Intervals
-Version: 1.0.3
+Title: Compute FAB (Frequentist and Bayes) Conformal Prediction Intervals
+Version: 1.0.4
 Authors@R: person("Elizabeth","Bersson",email = "elizabeth.bersson@duke.edu",role = c("aut","cre","cph"))
 Description: Computes and plots prediction intervals for numerical 
   data or prediction sets for categorical data using prior information. 
