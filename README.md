@@ -8,6 +8,11 @@ Bersson and Hoff (2023). [Frequentist Prediction Sets for Species Abundance usin
 
 Bersson and Hoff (2022). [Optimal Conformal Prediction for Small Areas](https://arxiv.org/pdf/2204.08122.pdf).
 
+## Examples
+
+- [vignette](https://rpubs.com/betsybersson/fabPrediction_Vignette)
+
+
 ## Installation
 
 ``` r
@@ -74,9 +79,6 @@ And this prediction set can be plotted:
 plot(y_PS)
 ```
 
-## Examples
-
-- [vignette](https://rpubs.com/betsybersson/fabPrediction_Vignette)
 
 
 
