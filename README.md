@@ -76,7 +76,7 @@ plot(y_PS)
 
 ## Examples
 
-- [vignette](https://rpubs.com/betsybersson/1158666)
+- [vignette](https://rpubs.com/betsybersson/fabPrediction_Vignette)
 
 
 
